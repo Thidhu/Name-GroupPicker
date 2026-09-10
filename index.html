@@ -17,7 +17,7 @@
   }
   :root{
     /* NIGHT (default) */
-    --bg:#aebbe0;
+    --bg:#dfe5f6;
     --bg-top:#0f1330;
     --bg-mid:#33447a;
     --bg-grad-a:#1d2348;
@@ -58,7 +58,7 @@
     background:
       radial-gradient(circle at 12% -10%, var(--bg-grad-a) 0%, transparent 55%),
       radial-gradient(circle at 110% 10%, var(--bg-grad-b) 0%, transparent 45%),
-      linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 35%, var(--bg-mid) 65%, var(--bg) 100%);
+      linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 20%, var(--bg-mid) 45%, var(--bg) 60%, var(--bg) 100%);
     background-attachment:fixed;
     color:var(--ink);
     font-family:'DM Sans', sans-serif;
@@ -404,11 +404,11 @@
 
   <div class="card">
     <div class="step-badge">༡</div>
-    <label class="field-label">མིང་ཐོ་བཀོད་འབད། (གྱལ་རེ་ལུ་མིང་རེ་བྲིས།)</label>
+    <label class="field-label">མིང་ཐོ་བཀོད་འབད། (གྱལ་ཐིག་རེ་ལུ་མིང་རེ་བྲིས།)</label>
     <div class="field-en">Step 1 — Write each name on its own line</div>
     <textarea id="names" placeholder="ཀུན་བཟང༌&#10;དབང་མོ༌&#10;ཚེ་རིང༌&#10;..."></textarea>
     <div class="row">
-      <span class="count-pill"><b id="nameCount">0</b> མིང (names)</span>
+      <span class="count-pill"><b id="nameCount">0</b> མིང་ (names)</span>
       <span class="count-pill" id="saveStatus" style="opacity:.6;">—</span>
       <button class="ghost" id="sampleBtn">
         <span class="dz">དཔེ་སྟོན།</span> <span style="color:var(--muted);font-size:11px;">(sample names)</span>
@@ -436,13 +436,13 @@
       <label class="opt">
         <input type="radio" name="mode" value="count" checked>
         <span>
-          <span class="t1 dz">སྡེ་ཚན་གྱི་གྱངས་ཁ།</span> <span class="t2">number of groups</span>
+          <span class="t1 dz">སྡེ་ཚན་གྱི་གྱངས་ཁ་དང་འཁྲིལ་བཟོ་ནི།།</span> <span class="t2">number of groups</span>
         </span>
       </label>
       <label class="opt">
         <input type="radio" name="mode" value="size">
         <span>
-          <span class="t1 dz">སྡེ་ཚན་ནང་ལུ་མི་ངོམ་གྱི་གྱངས་ཁ།</span> <span class="t2">people per group</span>
+          <span class="t1 dz">མི་ངོམ་གྱི་གྱངས་ཁ་དང་འཁྲིལ་བཟོ་ནི།</span> <span class="t2">people per group</span>
         </span>
       </label>
     </div>
