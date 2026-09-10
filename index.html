@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="dz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>སྡེ་ཚན་དང་མིང་འདེམས་ལག་ཆས</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tibetan:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* NIGHT (default) */
+    --bg:#12162a;
+    --bg-grad-a:#1d2348;
+    --bg-grad-b:#241f3a;
+    --surface:#1b2040;
+    --surface2:#252b52;
+    --line:#343d70;
+    --gold:#d4af5a;
+    --gold-strong:#e6c878;
+    --maroon:#c15b5b;
+    --green:#5a9270;
+    --blue:#5b7fc4;
+    --ink:#f2ecd9;
+    --muted:#9aa2c9;
+    --shadow:0 18px 40px -20px rgba(0,0,0,.55);
+  }
+  html[data-theme="day"]{
+    --bg:#eef3fb;
+    --bg-grad-a:#f6f9fd;
+    --bg-grad-b:#e1ebfa;
+    --surface:#ffffff;
+    --surface2:#eaf1fb;
+    --line:#cfdcf2;
+    --gold:#b5842a;
+    --gold-strong:#93641c;
+    --maroon:#9c3f3f;
+    --green:#3f7a67;
+    --blue:#3762a8;
+    --ink:#1c2b47;
+    --muted:#5c6b8c;
+    --shadow:0 18px 40px -22px rgba(40,60,110,.25);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 12% -10%, var(--bg-grad-a) 0%, transparent 55%),
+      radial-gradient(circle at 110% 10%, var(--bg-grad-b) 0%, transparent 45%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'DM Sans', sans-serif;
+    min-height:100vh;
+    padding:0 0 60px 0;
+    transition:background .35s ease, color .35s ease;
+  }
+  .dz{font-family:'Noto Sans Tibetan','DM Sans',sans-serif;}
+  .flagbar{height:5px;display:flex;}
+  .flagbar span{flex:1;}
+  .flagbar span:nth-child(1){background:var(--blue);}
+  .flagbar span:nth-child(2){background:var(--ink);opacity:.65;}
+  .flagbar span:nth-child(3){background:var(--maroon);}
+  .flagbar span:nth-child(4){background:var(--green);}
+  .flagbar span:nth-child(5){background:var(--gold);}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+
+  .topbar{
+    display:flex;justify-content:flex-end;align-items:center;
+    padding:20px 0 0;
+  }
+  .theme-toggle{
+    display:flex;align-items:center;gap:8px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:6px 8px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    user-select:none;
+  }
+  .theme-toggle .icon{
+    width:30px;height:30px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;
+    transition:background .25s ease, color .25s ease;
+  }
+  .theme-toggle .icon.active{background:var(--gold);color:#211a06;}
+  .theme-toggle .icon:not(.active){color:var(--muted);}
+  .theme-toggle .label{font-size:12px;color:var(--muted);padding-right:4px;}
+
+  header{padding:26px 0 30px;text-align:center;}
+  header h1{
+    font-family:'Noto Sans Tibetan',sans-serif;
+    font-size:clamp(30px,5vw,46px);
+    font-weight:700;
+    margin:0 0 8px;
+    color:var(--ink);
+    letter-spacing:0.5px;
+  }
+  header .sub{
+    font-family:'Noto Sans Tibetan',sans-serif;
+    color:var(--gold-strong);
+    font-size:16px;
+    margin:0 0 4px;
+  }
+  header .en{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--muted);
+    font-size:13.5px;
+    letter-spacing:0.2px;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:28px 28px 26px;
+    margin-bottom:22px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .step-badge{
+    position:absolute;
+    top:-14px;
+    left:26px;
+    width:32px;height:32px;
+    border-radius:50%;
+    background:linear-gradient(180deg, var(--gold-strong), var(--gold));
+    color:#241d05;
+    font-family:'Noto Sans Tibetan',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 14px -6px rgba(0,0,0,.4);
+  }
+
+  label.field-label{
+    display:block;
+    font-family:'Noto Sans Tibetan',sans-serif;
+    font-size:18px;
+    color:var(--ink);
+    margin-bottom:2px;
+  }
+  .field-en{color:var(--muted);font-size:12px;margin-bottom:12px;font-family:'Fraunces',serif;font-style:italic;}
+
+  textarea{
+    width:100%;
+    min-height:150px;
+    background:var(--surface2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    color:var(--ink);
+    font-family:'Noto Sans Tibetan','DM Sans',sans-serif;
+    font-size:16px;
+    padding:14px 16px;
+    resize:vertical;
+    line-height:1.7;
+    transition:background .35s ease, color .35s ease, border-color .2s ease;
+  }
+  textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb, var(--gold) 25%, transparent);}
+
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px;}
+
+  .count-pill{
+    font-size:13px;color:var(--muted);
+    background:var(--surface2);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 15px;
+  }
+  .count-pill b{color:var(--gold-strong);}
+
+  button{
+    font-family:'Noto Sans Tibetan','DM Sans',sans-serif;
+    font-size:15px;
+    border-radius:10px;
+    padding:12px 20px;
+    min-height:46px;
+    border:1px solid var(--line);
+    background:var(--surface2);
+    color:var(--ink);
+    cursor:pointer;
+    transition:transform .12s ease, background .12s ease, border-color .12s ease;
+  }
+  button:hover{border-color:var(--gold);}
+  button:active{transform:scale(.97);}
+  button.primary{
+    background:linear-gradient(180deg, var(--gold-strong), var(--gold));
+    color:#231a05;
+    border-color:var(--gold);
+    font-weight:600;
+    box-shadow:0 8px 18px -8px color-mix(in srgb, var(--gold) 70%, transparent);
+  }
+  button.primary:hover{filter:brightness(1.06);}
+  button.ghost{background:transparent;}
+  button:disabled{opacity:.4;cursor:not-allowed;}
+
+  .tabs{display:flex;gap:8px;margin-bottom:18px;}
+  .tab{
+    flex:1;
+    text-align:center;
+    padding:16px 10px;
+    min-height:52px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    cursor:pointer;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .tab .t1{font-family:'Noto Sans Tibetan',sans-serif;font-size:17px;}
+  .tab .t2{font-size:11px;color:var(--muted);margin-top:2px;font-family:'Fraunces',serif;font-style:italic;}
+  .tab.active{
+    background:linear-gradient(180deg,var(--surface2),var(--surface));
+    border-color:var(--gold);
+  }
+  .tab.active .t1{color:var(--gold-strong);}
+
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .opt-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .opt{
+    display:flex;align-items:center;gap:9px;
+    background:var(--surface2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:11px 15px;
+    min-height:44px;
+    cursor:pointer;
+  }
+  .opt input{accent-color:var(--gold);width:17px;height:17px;}
+  .opt span.t1{font-family:'Noto Sans Tibetan',sans-serif;font-size:15px;}
+  .opt span.t2{font-size:11px;color:var(--muted);font-family:'Fraunces',serif;font-style:italic;}
+
+  input[type=number]{
+    width:72px;
+    background:var(--surface2);
+    border:1px solid var(--line);
+    color:var(--ink);
+    border-radius:9px;
+    padding:9px 10px;
+    font-size:15px;
+  }
+  input[type=number]:focus{outline:none;border-color:var(--gold);}
+
+  .groups-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:14px;
+    margin-top:22px;
+  }
+  .group-card{
+    background:var(--surface2);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:15px 17px;
+    animation:pop .35s ease both;
+  }
+  .group-card h3{
+    font-family:'Noto Sans Tibetan',sans-serif;
+    color:var(--gold-strong);
+    margin:0 0 9px;
+    font-size:17px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:7px;
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .group-card h3 .en{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:11px;}
+  .group-card ul{margin:0;padding-left:18px;}
+  .group-card li{
+    font-family:'Noto Sans Tibetan','DM Sans',sans-serif;
+    font-size:15px;padding:3px 0;
+  }
+  @keyframes pop{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .picker-stage{
+    text-align:center;
+    padding:30px 10px 30px;
+  }
+  .wheel-wrap{
+    position:relative;
+    display:inline-block;
+    margin:0 auto 8px;
+  }
+  .wheel-frame{
+    position:relative;
+    width:min(300px,74vw);
+    height:min(300px,74vw);
+    border-radius:50%;
+    padding:8px;
+    background:linear-gradient(145deg, var(--gold-strong), var(--gold));
+    box-shadow:var(--shadow), inset 0 0 0 2px color-mix(in srgb, var(--surface) 40%, transparent);
+  }
+  .wheel-frame svg{
+    width:100%;height:100%;
+    display:block;
+    border-radius:50%;
+    background:var(--surface);
+  }
+  #wheelRotor{
+    transform-origin:150px 150px;
+    transition:transform 3.4s cubic-bezier(.14,.68,.1,1);
+  }
+  .wheel-hub{
+    fill:var(--surface);
+    stroke:var(--gold);
+    stroke-width:3;
+  }
+  .wheel-pointer{
+    position:absolute;
+    top:-4px;
+    left:50%;
+    transform:translateX(-50%);
+    width:0;height:0;
+    border-left:13px solid transparent;
+    border-right:13px solid transparent;
+    border-top:24px solid var(--gold-strong);
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,.35));
+    z-index:2;
+  }
+  .wheel-seg.spent{opacity:.28;}
+  .wheel-seg-text{
+    font-family:'Noto Sans Tibetan',sans-serif;
+    fill:#1b1406;
+    dominant-baseline:middle;
+  }
+  html[data-theme="day"] .wheel-seg-text{fill:#241d06;}
+  .picker-display{
+    font-family:'Noto Sans Tibetan',sans-serif;
+    font-size:clamp(26px,6vw,40px);
+    font-weight:700;
+    color:var(--gold-strong);
+    min-height:56px;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:14px;
+  }
+  .picker-hint{color:var(--muted);font-size:12.5px;margin-top:4px;font-family:'Fraunces',serif;font-style:italic;}
+
+  .history{margin-top:18px;}
+  .history .t1{font-family:'Noto Sans Tibetan',sans-serif;font-size:15px;color:var(--ink);}
+  .history-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px;}
+  .chip{
+    background:var(--surface2);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:5px 14px;
+    font-family:'Noto Sans Tibetan','DM Sans',sans-serif;
+    font-size:13.5px;
+    color:var(--ink);
+  }
+
+  .empty-msg{
+    font-family:'Noto Sans Tibetan',sans-serif;
+    color:var(--muted);
+    font-size:15px;
+    text-align:center;
+    padding:22px 0;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:11.5px;
+    margin-top:12px;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+  }
+</style>
+</head>
+<body>
+<div class="flagbar"><span></span><span></span><span></span><span></span><span></span></div>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="theme-toggle" id="soundToggle" role="button" aria-label="Toggle sound" style="margin-right:8px;">
+      <span class="icon active" id="iconSoundOn">🔊</span>
+    </div>
+    <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle day and night mode">
+      <span class="icon" id="iconSun">☀</span>
+      <span class="icon" id="iconMoon">☾</span>
+    </div>
+  </div>
+
+  <header>
+    <h1>སྡེ་ཚན་དང་མིང་འདེམས་ལག་ཆས</h1>
+    <div class="sub">སློབ་གྲྭའི་དོན་ལུ།</div>
+    <div class="en">Group Maker &amp; Name Picker — for classroom use</div>
+  </header>
+
+  <div class="card">
+    <div class="step-badge">༡</div>
+    <label class="field-label">མིང་ཚུ་གྱལ་རེ་རེར་ཐོ་བཀོད་འབད།</label>
+    <div class="field-en">Step 1 — Write each name on its own line</div>
+    <textarea id="names" placeholder="ཀུན་བཟང༌&#10;དབང་མོ༌&#10;ཚེ་རིང༌&#10;..."></textarea>
+    <div class="row">
+      <span class="count-pill"><b id="nameCount">0</b> མིང (names)</span>
+      <button class="ghost" id="sampleBtn">
+        <span class="dz">དཔེ་མིང་བཙུགས</span> <span style="color:var(--muted);font-size:11px;">(sample names)</span>
+      </button>
+      <button class="ghost" id="clearBtn">
+        <span class="dz">སོར་ཆུད</span> <span style="color:var(--muted);font-size:11px;">(clear)</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" id="tabGroupBtn">
+      <div class="t1 dz">སྡེ་ཚན་བཟོ།</div>
+      <div class="t2">Step 2a — Make Groups</div>
+    </div>
+    <div class="tab" id="tabPickBtn">
+      <div class="t1 dz">མིང་འདེམས།</div>
+      <div class="t2">Step 2b — Pick a Name</div>
+    </div>
+  </div>
+
+  <!-- GROUP MAKER -->
+  <div class="panel active card" id="panelGroup">
+    <div class="opt-row">
+      <label class="opt">
+        <input type="radio" name="mode" value="count" checked>
+        <span>
+          <span class="t1 dz">སྡེ་ཚན་གྱི་ཨང་</span> <span class="t2">number of groups</span>
+        </span>
+      </label>
+      <label class="opt">
+        <input type="radio" name="mode" value="size">
+        <span>
+          <span class="t1 dz">སྡེ་ཚན་རེ་ལུ་མི་ཨང་</span> <span class="t2">people per group</span>
+        </span>
+      </label>
+    </div>
+    <div class="row">
+      <input type="number" id="groupNum" min="1" value="2">
+      <button class="primary" id="makeGroupsBtn">
+        <span class="dz">སྡེ་ཚན་བཟོ།</span> <span style="font-size:11px;opacity:.75;">(generate)</span>
+      </button>
+      <button class="ghost" id="reshuffleBtn" style="display:none;">
+        <span class="dz">ལོག་སྟེ་སྒྲིག</span> <span style="font-size:11px;opacity:.75;">(shuffle again)</span>
+      </button>
+    </div>
+    <div id="groupsOut"></div>
+  </div>
+
+  <!-- NAME PICKER -->
+  <div class="panel card" id="panelPick">
+    <label class="opt" style="display:inline-flex;">
+      <input type="checkbox" id="removeAfterPick" checked>
+      <span>
+        <span class="t1 dz">འདེམས་ཚར་བའི་མིང་ཕྱིར་བཏོན།</span>
+        <span class="t2">remove picked name from list</span>
+      </span>
+    </label>
+
+    <div class="picker-stage">
+      <div class="wheel-wrap">
+        <div class="wheel-pointer"></div>
+        <div class="wheel-frame">
+          <svg id="wheelSvg" viewBox="0 0 300 300">
+            <g id="wheelRotor"></g>
+            <circle class="wheel-hub" cx="150" cy="150" r="16"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="picker-display dz" id="pickerDisplay">—</div>
+      <div class="picker-hint">འཁོར་ལོ་བསྐོར་ནིའི་དོན་ལུ་ཨོག་གི་སྤུས་ཨེབ་གནང༌ (spin the wheel below)</div>
+      <div class="row" style="justify-content:center;margin-top:14px;">
+        <button class="primary" id="pickBtn">
+          <span class="dz">འཁོར་ལོ་བསྐོར།</span> <span style="font-size:11px;opacity:.75;">(spin the wheel)</span>
+        </button>
+        <button class="ghost" id="resetPoolBtn">
+          <span class="dz">ཚང་མ་ལོག་སྟེ་བཙུགས</span> <span style="font-size:11px;opacity:.75;">(restore all)</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="history">
+      <div class="t1">འདེམས་ཟིན་མི། <span style="color:var(--muted);font-size:11px;">(already picked)</span></div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+
+  <footer>Dzongkha wording is a best effort — if any word doesn't sound right to your ear, tell Claude the correct term and it can be fixed.</footer>
+</div>
+
+<script>
+// THEME
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const iconSun = document.getElementById('iconSun');
+const iconMoon = document.getElementById('iconMoon');
+function setTheme(t){
+  root.setAttribute('data-theme', t);
+  iconSun.classList.toggle('active', t==='day');
+  iconMoon.classList.toggle('active', t==='night');
+}
+setTheme('night');
+themeToggle.addEventListener('click', ()=>{
+  const current = root.getAttribute('data-theme') === 'day' ? 'day' : 'night';
+  setTheme(current === 'day' ? 'night' : 'day');
+});
+
+// SOUND
+let soundOn = true;
+const soundToggle = document.getElementById('soundToggle');
+const iconSoundOn = document.getElementById('iconSoundOn');
+soundToggle.addEventListener('click', ()=>{
+  soundOn = !soundOn;
+  iconSoundOn.textContent = soundOn ? '🔊' : '🔇';
+  iconSoundOn.classList.toggle('active', soundOn);
+});
+
+let audioCtx = null;
+function getCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq, start, duration, type, gainPeak){
+  if(!soundOn) return;
+  const ctx = getCtx();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = type || 'sine';
+  osc.frequency.value = freq;
+  const t0 = ctx.currentTime + start;
+  gain.gain.setValueAtTime(0, t0);
+  gain.gain.linearRampToValueAtTime(gainPeak || 0.18, t0 + 0.008);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration + 0.03);
+}
+function playTick(){ tone(1150, 0, 0.045, 'square', 0.09); }
+function playReveal(){ tone(880,0,0.14,'sine',0.2); tone(1320,0.12,0.24,'sine',0.18); }
+function playSuccess(){
+  tone(660,0,0.14,'triangle',0.15);
+  tone(880,0.13,0.14,'triangle',0.15);
+  tone(1108,0.26,0.30,'triangle',0.18);
+}
+
+const namesEl = document.getElementById('names');
+const nameCountEl = document.getElementById('nameCount');
+
+const tibDigits = ['༠','༡','༢','༣','༤','༥','༦','༧','༨','༩'];
+function toTib(n){ return String(n).split('').map(d=>tibDigits[+d]).join(''); }
+
+function getNames(){
+  return namesEl.value.split('\n').map(s=>s.trim()).filter(Boolean);
+}
+function updateCount(){
+  nameCountEl.textContent = getNames().length;
+}
+namesEl.addEventListener('input', updateCount);
+
+document.getElementById('sampleBtn').addEventListener('click', ()=>{
+  namesEl.value = ['ཀུན་བཟང་','དབང་མོ་','ཚེ་རིང་','སོནམ་','དེམ་བི་','ཨུ་གྱེན་','ཆོས་སྐྱིད་','ཕུར་བ་','ལྷ་མོ་','ཀརྨ་'].join('\n');
+  updateCount();
+  document.getElementById('groupsOut').innerHTML='';
+  document.getElementById('reshuffleBtn').style.display='none';
+});
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  namesEl.value='';
+  updateCount();
+  document.getElementById('groupsOut').innerHTML='';
+  document.getElementById('reshuffleBtn').style.display='none';
+});
+
+// Tabs
+const tabGroupBtn = document.getElementById('tabGroupBtn');
+const tabPickBtn = document.getElementById('tabPickBtn');
+const panelGroup = document.getElementById('panelGroup');
+const panelPick = document.getElementById('panelPick');
+tabGroupBtn.addEventListener('click', ()=>{
+  tabGroupBtn.classList.add('active'); tabPickBtn.classList.remove('active');
+  panelGroup.classList.add('active'); panelPick.classList.remove('active');
+});
+tabPickBtn.addEventListener('click', ()=>{
+  tabPickBtn.classList.add('active'); tabGroupBtn.classList.remove('active');
+  panelPick.classList.add('active'); panelGroup.classList.remove('active');
+  buildWheel();
+});
+
+// Shuffle
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// GROUP MAKER
+function makeGroups(){
+  const names = getNames();
+  const out = document.getElementById('groupsOut');
+  const reshuffleBtn = document.getElementById('reshuffleBtn');
+  if(names.length === 0){
+    out.innerHTML = '<div class="empty-msg">མིང་ཚུ་སྔོན་ལས་ཐོ་བཀོད་འབད་གནང༌ (please enter names above first)</div>';
+    reshuffleBtn.style.display='none';
+    return;
+  }
+  const mode = document.querySelector('input[name=mode]:checked').value;
+  let num = parseInt(document.getElementById('groupNum').value,10) || 1;
+  if(num < 1) num = 1;
+
+  const shuffled = shuffle(names);
+
+  let groupCount;
+  if(mode === 'count'){
+    groupCount = Math.min(num, shuffled.length);
+  } else {
+    groupCount = Math.max(1, Math.ceil(shuffled.length / num));
+  }
+
+  const groups = Array.from({length:groupCount}, ()=>[]);
+  shuffled.forEach((n,i)=>{ groups[i % groupCount].push(n); });
+
+  out.innerHTML = '<div class="groups-grid">' + groups.map((g,i)=>`
+    <div class="group-card" style="animation-delay:${i*0.05}s">
+      <h3><span>སྡེ་ཚན་ ${toTib(i+1)}</span><span class="en">Group ${i+1}</span></h3>
+      <ul>${g.map(n=>`<li>${n}</li>`).join('')}</ul>
+    </div>`).join('') + '</div>';
+
+  reshuffleBtn.style.display = 'inline-block';
+  playSuccess();
+}
+document.getElementById('makeGroupsBtn').addEventListener('click', makeGroups);
+document.getElementById('reshuffleBtn').addEventListener('click', makeGroups);
+
+// NAME PICKER — spinning wheel
+const wheelRotor = document.getElementById('wheelRotor');
+const pickerDisplay = document.getElementById('pickerDisplay');
+const pickBtn = document.getElementById('pickBtn');
+
+let wheelNames = [];      // names currently drawn on the wheel (fixed order per build)
+let spentSet = new Set(); // indices already picked (when remove-after-pick is on)
+let totalRotation = 0;
+let spinning = false;
+
+const wheelPalette = ['var(--gold)','var(--maroon)','var(--blue)','var(--green)','var(--gold-strong)'];
+
+function buildWheel(){
+  wheelNames = shuffle(getNames());
+  spentSet = new Set();
+  totalRotation = 0;
+  wheelRotor.style.transition = 'none';
+  wheelRotor.style.transform = 'rotate(0deg)';
+  drawWheel();
+  pickerDisplay.textContent = '—';
+  requestAnimationFrame(()=>{ wheelRotor.style.transition=''; });
+}
+
+function drawWheel(){
+  const n = wheelNames.length;
+  wheelRotor.innerHTML = '';
+  if(n === 0){
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',150); c.setAttribute('cy',150); c.setAttribute('r',145);
+    c.setAttribute('fill','var(--surface2)');
+    wheelRotor.appendChild(c);
+    return;
+  }
+  const cx=150, cy=150, r=145;
+  const anglePer = 360/n;
+  const fontSize = Math.max(9, Math.min(15, 210/n));
+  for(let i=0;i<n;i++){
+    const t1 = (i*anglePer) * Math.PI/180;
+    const t2 = ((i+1)*anglePer) * Math.PI/180;
+    const x1 = cx + r*Math.sin(t1), y1 = cy - r*Math.cos(t1);
+    const x2 = cx + r*Math.sin(t2), y2 = cy - r*Math.cos(t2);
+    const largeArc = anglePer > 180 ? 1 : 0;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', `M${cx},${cy} L${x1.toFixed(2)},${y1.toFixed(2)} A${r},${r} 0 ${largeArc} 1 ${x2.toFixed(2)},${y2.toFixed(2)} Z`);
+    path.setAttribute('fill', wheelPalette[i % wheelPalette.length]);
+    path.setAttribute('stroke','var(--surface)');
+    path.setAttribute('stroke-width','1.5');
+    path.classList.add('wheel-seg');
+    if(spentSet.has(i)) path.classList.add('spent');
+    wheelRotor.appendChild(path);
+
+    const midAngle = (i*anglePer + anglePer/2);
+    const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+    text.setAttribute('class','wheel-seg-text');
+    text.setAttribute('x', cx);
+    text.setAttribute('y', cy - r*0.62);
+    text.setAttribute('text-anchor','middle');
+    text.setAttribute('font-size', fontSize);
+    text.setAttribute('transform', `rotate(${midAngle} ${cx} ${cy})`);
+    text.textContent = wheelNames[i];
+    if(spentSet.has(i)) text.classList.add('spent');
+    wheelRotor.appendChild(text);
+  }
+}
+
+function refreshPool(){
+  buildWheel();
+  pickedHistory = [];
+  renderHistory();
+}
+let pickedHistory = [];
+namesEl.addEventListener('input', ()=>{ if(panelPick.classList.contains('active')) refreshPool(); });
+
+function renderHistory(){
+  const list = document.getElementById('historyList');
+  if(pickedHistory.length===0){
+    list.innerHTML = '<span style="color:var(--muted);font-size:13px;">—</span>';
+    return;
+  }
+  list.innerHTML = pickedHistory.map(n=>`<span class="chip">${n}</span>`).join('');
+}
+
+pickBtn.addEventListener('click', ()=>{
+  if(spinning) return;
+  if(wheelNames.length === 0){ buildWheel(); }
+  if(wheelNames.length === 0){
+    pickerDisplay.textContent = 'མིང་མེད།';
+    return;
+  }
+  const removeAfter = document.getElementById('removeAfterPick').checked;
+  const n = wheelNames.length;
+  const anglePer = 360/n;
+
+  let available = wheelNames.map((_,i)=>i).filter(i => !spentSet.has(i));
+  if(removeAfter && available.length === 0){
+    available = wheelNames.map((_,i)=>i);
+    spentSet = new Set();
+  }
+  const winIdx = available[Math.floor(Math.random()*available.length)];
+  const segCenter = winIdx*anglePer + anglePer/2;
+
+  const prevMod = ((totalRotation % 360) + 360) % 360;
+  const desiredMod = ((360 - segCenter) % 360 + 360) % 360;
+  const diff = ((desiredMod - prevMod) + 360) % 360;
+  const spins = 5;
+  totalRotation += spins*360 + diff;
+
+  spinning = true;
+  pickBtn.disabled = true;
+  pickerDisplay.textContent = '';
+  wheelRotor.style.transform = `rotate(${totalRotation}deg)`;
+
+  // ticking sound synced to the wheel's deceleration (dense at start, sparse near the stop)
+  const spinDuration = 3400;
+  const tickCount = Math.min(40, Math.max(14, n*3));
+  for(let i=0;i<tickCount;i++){
+    const frac = Math.pow(i/(tickCount-1), 1.7);
+    setTimeout(playTick, frac*spinDuration);
+  }
+
+  setTimeout(()=>{
+    const chosen = wheelNames[winIdx];
+    pickerDisplay.textContent = chosen;
+    playReveal();
+    pickedHistory.unshift(chosen);
+    renderHistory();
+    if(removeAfter){
+      spentSet.add(winIdx);
+      drawWheel();
+    }
+    spinning = false;
+    pickBtn.disabled = false;
+  }, 3450);
+});
+
+document.getElementById('resetPoolBtn').addEventListener('click', refreshPool);
+
+updateCount();
+buildWheel();
+</script>
+</body>
+</html>
