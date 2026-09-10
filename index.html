@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>སྡེ་ཚན་དང་མིང་འདེམས་ལག་ཆས</title>
+<title>Name Picker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tibetan:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -384,34 +384,34 @@
   </div>
 
   <header>
-    <h1>སྡེ་ཚན་དང་མིང་འདེམས་ལག་ཆས</h1>
-    <div class="sub">སློབ་གྲྭའི་དོན་ལུ།</div>
+    <h1>སྡེ་ཚན་དང་མིང་གི་འཁོར་ལོ།</h1>
+    <div class="sub">རྫོང་སློབ་ཡོངས་ཀྱི་དོན་ལུ།</div>
     <div class="en">Group Maker &amp; Name Picker — for classroom use</div>
   </header>
 
   <div class="card">
     <div class="step-badge">༡</div>
-    <label class="field-label">མིང་ཚུ་གྱལ་རེ་རེར་ཐོ་བཀོད་འབད།</label>
+    <label class="field-label">མིང་ཐོ་བཀོད་འབད། (གྱལ་རེ་ལུ་མིང་རེ་བྲིས།)</label>
     <div class="field-en">Step 1 — Write each name on its own line</div>
     <textarea id="names" placeholder="ཀུན་བཟང༌&#10;དབང་མོ༌&#10;ཚེ་རིང༌&#10;..."></textarea>
     <div class="row">
       <span class="count-pill"><b id="nameCount">0</b> མིང (names)</span>
       <button class="ghost" id="sampleBtn">
-        <span class="dz">དཔེ་མིང་བཙུགས</span> <span style="color:var(--muted);font-size:11px;">(sample names)</span>
+        <span class="dz">དཔེ་སྟོན།</span> <span style="color:var(--muted);font-size:11px;">(sample names)</span>
       </button>
       <button class="ghost" id="clearBtn">
-        <span class="dz">སོར་ཆུད</span> <span style="color:var(--muted);font-size:11px;">(clear)</span>
+        <span class="dz">གསལ།</span> <span style="color:var(--muted);font-size:11px;">(clear)</span>
       </button>
     </div>
   </div>
 
   <div class="tabs">
     <div class="tab active" id="tabGroupBtn">
-      <div class="t1 dz">སྡེ་ཚན་བཟོ།</div>
+      <div class="t1 dz">སྡེ་ཚན་བཟོ་ས།</div>
       <div class="t2">Step 2a — Make Groups</div>
     </div>
     <div class="tab" id="tabPickBtn">
-      <div class="t1 dz">མིང་འདེམས།</div>
+      <div class="t1 dz">མིང་འཐུ་ས།</div>
       <div class="t2">Step 2b — Pick a Name</div>
     </div>
   </div>
@@ -422,13 +422,13 @@
       <label class="opt">
         <input type="radio" name="mode" value="count" checked>
         <span>
-          <span class="t1 dz">སྡེ་ཚན་གྱི་ཨང་</span> <span class="t2">number of groups</span>
+          <span class="t1 dz">སྡེ་ཚན་གྱི་གྱངས་ཁ།</span> <span class="t2">number of groups</span>
         </span>
       </label>
       <label class="opt">
         <input type="radio" name="mode" value="size">
         <span>
-          <span class="t1 dz">སྡེ་ཚན་རེ་ལུ་མི་ཨང་</span> <span class="t2">people per group</span>
+          <span class="t1 dz">སྡེ་ཚན་ནང་ལུ་མི་ངོམ་གྱི་གྱངས་ཁ།</span> <span class="t2">people per group</span>
         </span>
       </label>
     </div>
@@ -438,7 +438,7 @@
         <span class="dz">སྡེ་ཚན་བཟོ།</span> <span style="font-size:11px;opacity:.75;">(generate)</span>
       </button>
       <button class="ghost" id="reshuffleBtn" style="display:none;">
-        <span class="dz">ལོག་སྟེ་སྒྲིག</span> <span style="font-size:11px;opacity:.75;">(shuffle again)</span>
+        <span class="dz">ལོག་སྤེལ་ནི།</span> <span style="font-size:11px;opacity:.75;">(shuffle again)</span>
       </button>
     </div>
     <div id="groupsOut"></div>
@@ -449,7 +449,7 @@
     <label class="opt" style="display:inline-flex;">
       <input type="checkbox" id="removeAfterPick" checked>
       <span>
-        <span class="t1 dz">འདེམས་ཚར་བའི་མིང་ཕྱིར་བཏོན།</span>
+        <span class="t1 dz">མིང་འཐོན་ཚར་མི་ཚུ་ ཕྱི་ཁར་བཏོན།</span>
         <span class="t2">remove picked name from list</span>
       </span>
     </label>
@@ -471,18 +471,18 @@
           <span class="dz">འཁོར་ལོ་བསྐོར།</span> <span style="font-size:11px;opacity:.75;">(spin the wheel)</span>
         </button>
         <button class="ghost" id="resetPoolBtn">
-          <span class="dz">ཚང་མ་ལོག་སྟེ་བཙུགས</span> <span style="font-size:11px;opacity:.75;">(restore all)</span>
+          <span class="dz">མིང་ག་ར་ལོག་བཙུགས</span> <span style="font-size:11px;opacity:.75;">(restore all)</span>
         </button>
       </div>
     </div>
 
     <div class="history">
-      <div class="t1">འདེམས་ཟིན་མི། <span style="color:var(--muted);font-size:11px;">(already picked)</span></div>
+      <div class="t1">མིང་འཐོན་ཚར་མི། <span style="color:var(--muted);font-size:11px;">(already picked)</span></div>
       <div class="history-list" id="historyList"></div>
     </div>
   </div>
 
-  <footer>Dzongkha wording is a best effort — if any word doesn't sound right to your ear, tell Claude the correct term and it can be fixed.</footer>
+  <footer>རྫོང་སློབ་ཚུ་གི་དོན་ལུ་ སློབ་སྟོན་མཁོ་ཆས་ཅིག་སྦེ་ ལག་ལེན་འཐབ་བཏུབ་པའི་རེ་བ་ཡོད་ལགས།</footer>
 </div>
 
 <script>
@@ -556,7 +556,7 @@ function updateCount(){
 namesEl.addEventListener('input', updateCount);
 
 document.getElementById('sampleBtn').addEventListener('click', ()=>{
-  namesEl.value = ['ཀུན་བཟང་','དབང་མོ་','ཚེ་རིང་','སོནམ་','དེམ་བི་','ཨུ་གྱེན་','ཆོས་སྐྱིད་','ཕུར་བ་','ལྷ་མོ་','ཀརྨ་'].join('\n');
+  namesEl.value = ['ཀུན་བཟང་','དབང་མོ་','ཚེ་རིང་','བསོད་ནམས་','བདེ་སྐྱིད།','ཨུ་་རྒྱན།་','ཆོས་སྐྱིད་','ཕུར་པ་','ལྷ་མོ་','ཀརྨ་'].join('\n');
   updateCount();
   document.getElementById('groupsOut').innerHTML='';
   document.getElementById('reshuffleBtn').style.display='none';
@@ -599,7 +599,7 @@ function makeGroups(){
   const out = document.getElementById('groupsOut');
   const reshuffleBtn = document.getElementById('reshuffleBtn');
   if(names.length === 0){
-    out.innerHTML = '<div class="empty-msg">མིང་ཚུ་སྔོན་ལས་ཐོ་བཀོད་འབད་གནང༌ (please enter names above first)</div>';
+    out.innerHTML = '<div class="empty-msg">ཧེ་མ་ར་ ལྟག་ལུ་མིང་ཚུ་ ཐོ་བཀོད་འབད་གནང༌། (please enter names above first)</div>';
     reshuffleBtn.style.display='none';
     return;
   }
@@ -718,7 +718,7 @@ pickBtn.addEventListener('click', ()=>{
   if(spinning) return;
   if(wheelNames.length === 0){ buildWheel(); }
   if(wheelNames.length === 0){
-    pickerDisplay.textContent = 'མིང་མེད།';
+    pickerDisplay.textContent = 'མིང་མིན་འདུག།';
     return;
   }
   const removeAfter = document.getElementById('removeAfterPick').checked;
