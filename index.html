@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="dz">
+<html lang="dz" data-theme="night">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,9 @@
   }
   :root{
     /* NIGHT (default) */
-    --bg:#12162a;
+    --bg:#aebbe0;
+    --bg-top:#0f1330;
+    --bg-mid:#33447a;
     --bg-grad-a:#1d2348;
     --bg-grad-b:#241f3a;
     --surface:#1b2040;
@@ -34,6 +36,8 @@
   }
   html[data-theme="day"]{
     --bg:#eef3fb;
+    --bg-top:#ffffff;
+    --bg-mid:#dbe6f7;
     --bg-grad-a:#f6f9fd;
     --bg-grad-b:#e1ebfa;
     --surface:#ffffff;
@@ -54,7 +58,8 @@
     background:
       radial-gradient(circle at 12% -10%, var(--bg-grad-a) 0%, transparent 55%),
       radial-gradient(circle at 110% 10%, var(--bg-grad-b) 0%, transparent 45%),
-      var(--bg);
+      linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 35%, var(--bg-mid) 65%, var(--bg) 100%);
+    background-attachment:fixed;
     color:var(--ink);
     font-family:'DM Sans', sans-serif;
     min-height:100vh;
