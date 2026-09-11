@@ -576,10 +576,10 @@ let saveTimer = null;
 async function saveNamesNow(){
   try{
     await window.storage.set(NAMES_KEY, namesEl.value, false); // false = personal, not shared
-    if(saveStatusEl){ saveStatusEl.textContent = 'ཉར་ཚགས་སོང༌ (saved)'; saveStatusEl.style.opacity = '.85'; }
+    if(saveStatusEl){ saveStatusEl.textContent = 'མིང་saveའབད་ཡི། (saved)'; saveStatusEl.style.opacity = '.85'; }
   }catch(e){
     console.error('Storage save failed:', e);
-    if(saveStatusEl){ saveStatusEl.textContent = 'ཉར་ཚགས་མ་ཚུགས། (save failed)'; saveStatusEl.style.opacity = '.85'; }
+    if(saveStatusEl){ saveStatusEl.textContent = 'མིང་Saveའབད་མ་ཚུགས། (save failed)'; saveStatusEl.style.opacity = '.85'; }
   }
 }
 function scheduleSave(){
